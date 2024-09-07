@@ -1,0 +1,49 @@
+window {
+margin: 0px;
+font-size: 24px;
+font-family: "FiraCode Light";
+border: 0px solid black;
+background-color: white;
+}
+
+#input {
+font-family: "FiraCode Medium";
+margin: 0px;
+border: 0px solid #0000;
+border-radius: 0px;
+background-color: #ffff;
+}
+
+#inner-box {
+margin: 0px;
+border: 0px solid #0000;
+border-radius: 25p;
+background-color: #ffff;
+}
+
+#outer-box {
+margin: 0px;
+border: 1px solid gray;
+background-color: #0000;
+}
+
+#scroll {
+margin: 5px;
+border: 0px solid orange;
+background-color: #0000;
+}
+
+#text {
+margin: 0px;
+}
+
+
+#entry:selected {
+background-color: #000000;
+font-family: "FiraCode Medium";
+}
+
+#text:selected {
+background-color: black;
+}
+

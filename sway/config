@@ -17,7 +17,7 @@ set $term foot
 # application launcher
 #set $menu dmenu_path | wmenu | xargs swaymsg exec --
 #set $menu wofi --show drun -i | xargs swaymsg exec --
-set $menu wofi --show drun --location=top -i --width=24% --height=33% | xargs swaymsg exec --
+set $menu wofi --show drun -i --width=40% --height=33% | xargs swaymsg exec --
 
 # fullscreen screenshot
 bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
@@ -30,8 +30,21 @@ bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(
 output * bg ~/Pictures/Wallpapers/gnu-embossed.png fill
 #output * bg #63619f solid_color
 
+# Focused window color
+client.focused #000000 #000000 #ffffff #000000
 
-# Example configuration:
+# Unfocused window color
+client.unfocused #f5f5f5 #f5f5f5 #888888 #323232
+
+
+default_border pixel 2px
+default_floating_border none
+
+titlebar_padding 1
+
+titlebar_border_thickness 0
+
+#Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
@@ -229,6 +242,7 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+bindsym $mod+q exec "swaymsg bar mode toggle"
 bar {
     position bottom
 
@@ -239,8 +253,8 @@ bar {
 
 
     colors {
-        statusline #000000
-        background #f5f5f5
+        statusline #ffffff
+        background #000000
         
     }
 }

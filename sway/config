@@ -24,11 +24,15 @@ bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
 # area screenshot
 bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%s).png
 
-
 ### wallpaper
 #output * bg /usr/share/backgrounds/gnome/pills-l.jxl fill
-output * bg ~/Pictures/Wallpapers/gnu-embossed.png fill
-#output * bg #63619f solid_color
+#output * bg ~/Pictures/Wallpapers/keith-hardy-PP8Escz15d8-rounded.jpg fill
+#output * bg ~/Documents/deneme.png fill
+output * bg #2c3e50 solid_color
+
+# Floating Window On PiP
+for_window [title="Picture-in-Picture"] floating enable
+
 
 # Focused window color
 client.focused #000000 #000000 #ffffff #000000
@@ -70,7 +74,12 @@ input "1739:52990:SYNACFFE:00_06CB:CEFE_Touchpad" {
 # keyboard
 input type:keyboard {
   # swap CTRL AND ALT
-  xkb_options "ctrl:swapcaps"
+  #xkb_options "ctrl:swapcaps"
+
+  # swap ctr:caps win:alt
+  #xkb_options "altwin:swap_lalt_lwin"
+  xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
+
 }
 
 # brightness up

@@ -79,8 +79,11 @@ input type:keyboard {
   # swap ctr:caps win:alt
   #xkb_options "altwin:swap_lalt_lwin"
   xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
-
+  
+  xkb_layout "us,tr"
 }
+# Binded Mod Alt Space to switch keyboard layouts between US and TR
+bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next
 
 # brightness up
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%

@@ -22,7 +22,7 @@ while true; do
         # Using nmcli
         WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d':' -f2)
         if [ -z "$WIFI" ]; then
-            WIFI="WIFI: 0"
+            WIFI="WIFI: off"
         else
             WIFI="WIFI: $WIFI"
         fi
@@ -30,7 +30,7 @@ while true; do
         # Using iwgetid
         WIFI=$(iwgetid -r)
         if [ -z "$WIFI_" ]; then
-            WIFI="WIFI: Off"
+            WIFI="WIFI: off"
         else
             WIFI="WIFI: $WIFI"
         fi
@@ -47,12 +47,12 @@ while true; do
             #BLUETOOTH_DEVICES=$(bluetoothctl devices Connected | awk '{print $3}')
             if [ -z "$BLUETOOTH_DEVICES" ]; then
                 #BLUETOOTH_DEVICES="No devices"
-		BLUETOOTH_DEVICES="1"
+		BLUETOOTH_DEVICES="on"
             else
                 BLUETOOTH_DEVICES="$BLUETOOTH_DEVICES"
             fi
         else
-            BLUETOOTH_STATUS="BT: 0" # bluetooth off
+            BLUETOOTH_STATUS="BT: off" # bluetooth off
             BLUETOOTH_DEVICES=""
         fi
     else
@@ -61,10 +61,10 @@ while true; do
     fi
 
     # Get current date and time
-    DATE_TIME=$(date +"%a %b %e  %H:%M")
+    DATE_TIME=$(date +"%a, %b %e  %H:%M")
 
     # Output formatted string
-    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES  $WIFI  VOL: $VOL  BAT: $BAT%$CHARGING_SYMBOL  $DATE_TIME " | awk '{print $0}'
+    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES ∙ $WIFI ∙ VOL: $VOL ∙ BAT: $BAT%$CHARGING_SYMBOL ∙ $DATE_TIME " | awk '{print $0}'
     # Update every 30 seconds
     sleep 30
 done

@@ -28,7 +28,7 @@ bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(
 #output * bg /usr/share/backgrounds/gnome/pills-l.jxl fill
 #output * bg ~/Pictures/Wallpapers/keith-hardy-PP8Escz15d8-rounded.jpg fill
 #output * bg ~/Documents/deneme.png fill
-output * bg  #f5f5f5 solid_color
+output * bg  #454545 solid_color
 
 # Floating Window On PiP
 for_window [title="Picture-in-Picture"] floating enable
@@ -263,7 +263,7 @@ bar {
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     status_command /home/cankurttekin/.config/sway/scripts/status.sh
     
-    font "FiraCode Regular"
+    font "FiraCode Light"
     #height 20
 
     colors {

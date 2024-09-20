@@ -25,21 +25,17 @@ bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
 bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%s).png
 
 ### wallpaper
-#output * bg /usr/share/backgrounds/gnome/pills-l.jxl fill
-#output * bg ~/Pictures/Wallpapers/keith-hardy-PP8Escz15d8-rounded.jpg fill
-#output * bg ~/Documents/deneme.png fill
-output * bg  #454545 solid_color
+#output * bg /usr/share/backgrounds/gnome/drool-l.svg fill
+output * bg  #c4c6cd solid_color
 
-# Floating Window On PiP
+# floating window on pip
 for_window [title="Picture-in-Picture"] floating enable
 
+# focused window color
+client.focused #ffffff #ffffff #ffffff #000000
 
-# Focused window color
-client.focused #000000 #000000 #ffffff #000000
-
-# Unfocused window color
-client.unfocused #f5f5f5 #f5f5f5 #888888 #323232
-
+# unfocused window color
+client.unfocused #000000 #000000 #888888 #323232
 
 default_border pixel 2px
 default_floating_border none
@@ -48,22 +44,16 @@ titlebar_padding 1
 
 titlebar_border_thickness 0
 
-#Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-
-### Idle configuration
-### Lock screen after 2 minutes of inactivity, turn off display after another 2 minutes.
+## idle configuration
+## lock screen after 2 minutes of inactivity, turn off display after another 2 minutes
 exec swayidle -w \
          timeout 120 'swaylock -f -c 000000' \
          timeout 120 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-### Input configuration
-# touchpad
-input "1739:52990:SYNACFFE:00_06CB:CEFE_Touchpad" {
+### input configuration
+### touchpad
+input type:touchpad {
     dwt enabled
     tap enabled
     natural_scroll enabled

@@ -22,7 +22,7 @@ while true; do
         # Using nmcli
         WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d':' -f2)
         if [ -z "$WIFI" ]; then
-            WIFI="WIFI: off"
+            WIFI="WIFI: Off"
         else
             WIFI="WIFI: $WIFI"
         fi
@@ -30,7 +30,7 @@ while true; do
         # Using iwgetid
         WIFI=$(iwgetid -r)
         if [ -z "$WIFI_" ]; then
-            WIFI="WIFI: off"
+            WIFI="WIFI: Off"
         else
             WIFI="WIFI: $WIFI"
         fi
@@ -47,12 +47,12 @@ while true; do
             #BLUETOOTH_DEVICES=$(bluetoothctl devices Connected | awk '{print $3}')
             if [ -z "$BLUETOOTH_DEVICES" ]; then
                 #BLUETOOTH_DEVICES="No devices"
-		BLUETOOTH_DEVICES="on"
+		BLUETOOTH_DEVICES="On"
             else
                 BLUETOOTH_DEVICES="$BLUETOOTH_DEVICES"
             fi
         else
-            BLUETOOTH_STATUS="BT: off" # bluetooth off
+            BLUETOOTH_STATUS="BT: Off" # bluetooth off
             BLUETOOTH_DEVICES=""
         fi
     else

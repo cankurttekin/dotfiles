@@ -3,56 +3,55 @@
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
-# logo key Mod4-Super, Mod1-Alt.
+# mod key Mod4-Super, Mod1-Alt
 set $mod Mod4
-# home row direction keys, like vim
+
+## home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 
-# terminal emulator
+## terminal emulator
 set $term foot
 
-# application launcher
-#set $menu dmenu_path | wmenu | xargs swaymsg exec --
-#set $menu wofi --show drun -i | xargs swaymsg exec --
+## application launcher
 set $menu wofi --show drun -i --width=40% --height=33% | xargs swaymsg exec --
 
+## Screenshot
 # fullscreen screenshot
 bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
 # area screenshot
 bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%s).png
 
-### wallpaper
-#output * bg /usr/share/backgrounds/gnome/drool-l.svg fill
-output * bg  #c4c6cd solid_color
+## wallpaper
+output * bg ~/Pictures/Wallpapers/my-wallpaper.png fill
+#output * bg ~/Pictures/Wallpapers/gnu-embossed-rounded.png fill
+#output * bg  #000000 solid_color
 
-# floating window on pip
+## floating window on pip
 for_window [title="Picture-in-Picture"] floating enable
 
-# focused window color
-client.focused #ffffff #ffffff #ffffff #000000
+## focused window color
+client.focused #315ff3 #315ff3 #315ff3 #315ff3
 
-# unfocused window color
-client.unfocused #000000 #000000 #888888 #323232
+## unfocused window color
+#client.unfocused #000000 #000000 #888888 #323232
 
-default_border pixel 2px
+default_border pixel 3px
 default_floating_border none
-
 titlebar_padding 1
 
 titlebar_border_thickness 0
 
 ## idle configuration
-## lock screen after 2 minutes of inactivity, turn off display after another 2 minutes
 exec swayidle -w \
-         timeout 120 'swaylock -f -c 000000' \
-         timeout 120 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 180 'swaylock -f -c 000000' \
+         timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-### input configuration
-### touchpad
+## input configuration
+# touchpad
 input type:touchpad {
     dwt enabled
     tap enabled
@@ -67,11 +66,13 @@ input type:keyboard {
   #xkb_options "ctrl:swapcaps"
 
   # swap ctr:caps win:alt
-  #xkb_options "altwin:swap_lalt_lwin"
+  # xkb_options "altwin:swap_lalt_lwin"
+  # xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
   xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
-  
+
   xkb_layout "us,tr"
 }
+
 # Binded Mod Alt Space to switch keyboard layouts between US and TR
 bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next
 
@@ -79,9 +80,6 @@ bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
 # brightness down
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-
-# Disable fn lock led. ---> DOESNT WORK, DISABLING LED ALSO DISABLES FN+LOCK SO NO POINT SETTING THIS
-#exec_always brightnessctl --device='platform::fnlock' set 0
 
 # mute 
 bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
@@ -251,15 +249,15 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    status_command /home/cankurttekin/.config/sway/scripts/status.sh
+    status_command ~/.config/sway/scripts/status.sh
     
-    font "FiraCode Light"
+    font "IBM Plex Sans"
     #height 20
 
     colors {
-        statusline #ffffff
+        statusline #f5f5f5
         background #000000
-        
+       focused_workspace #ffffff #315ff3 #ffffff
     }
 }
 

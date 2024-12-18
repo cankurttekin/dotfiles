@@ -21,6 +21,7 @@ while true; do
     if command -v nmcli >/dev/null 2>&1; then
         # Using nmcli
         WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d':' -f2)
+	#WIFI=$(nmcli -t -f active,ssid dev wifi | grep 'yes' | cut -d':' -f2 | awk '{print substr($0,1,1)"..."substr($0,length($0)-3,4)}') # returns wifi name as a...aaaa
         if [ -z "$WIFI" ]; then
             WIFI="WIFI: Off"
         else
@@ -60,11 +61,17 @@ while true; do
         BLUETOOTH_DEVICES=""
     fi
 
+    BRIGHTNESS=$(brightnessctl | awk -F '[()/%]' '{print $2}' | tr -d '\n')
+
+    CPU_TEMP=$(sensors | grep -i 'Package id 0:' | awk '{print $4}' | sed 's/+//')
+    
+    POWER=$(sensors | grep -i 'power1:' | awk '{print $2}')
+    
     # Get current date and time
     DATE_TIME=$(date +"%a, %b %e  %H:%M")
-
+    
     # Output formatted string
-    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES ∙ $WIFI ∙ VOL: $VOL ∙ BAT: $BAT%$CHARGING_SYMBOL ∙ $DATE_TIME " | awk '{print $0}'
+    echo "POWER: $POWER W   CPU TEMP: $CPU_TEMP   BRIGHTNESS: $BRIGHTNESS   $BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
     # Update every 30 seconds
     sleep 30
 done

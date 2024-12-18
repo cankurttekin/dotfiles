@@ -16,7 +16,7 @@ set $right l
 set $term foot
 
 ## application launcher
-set $menu wofi --show drun -i --width=40% --height=33% | xargs swaymsg exec --
+set $menu wofi --show drun -i --width=40% --height=43% | xargs swaymsg exec --
 
 ## Screenshot
 # fullscreen screenshot
@@ -25,8 +25,8 @@ bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
 bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%s).png
 
 ## wallpaper
-output * bg ~/Pictures/Wallpapers/my-wallpaper.png fill
-#output * bg ~/Pictures/Wallpapers/gnu-embossed-rounded.png fill
+#output * bg ~/Pictures/Wallpapers/my-wallpaper.png fill
+output * bg ~/Pictures/Wallpapers/pawel-czerwinski-eTLKz1gEVoQ-unsplash-rounded.jpg fill
 #output * bg  #000000 solid_color
 
 ## floating window on pip
@@ -69,7 +69,7 @@ input type:keyboard {
   # xkb_options "altwin:swap_lalt_lwin"
   # xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
   xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
-
+ 
   xkb_layout "us,tr"
 }
 
@@ -251,12 +251,12 @@ bar {
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     status_command ~/.config/sway/scripts/status.sh
     
-    font "IBM Plex Sans"
-    #height 20
+    font "IBM Plex Sans Bold"
+    height 25
 
     colors {
-        statusline #f5f5f5
-        background #000000
+        statusline #000000
+        background #dddddd
        focused_workspace #ffffff #315ff3 #ffffff
     }
 }

@@ -18,6 +18,10 @@ set $term foot
 ## application launcher
 set $menu wofi --show drun -i --width=40% --height=43% | xargs swaymsg exec --
 
+##LXQT polkit agent for permissions 
+#exec /usr/libexec/lxqt-policykit-agent
+#for_window [app_id="lxqt-policykit-agent"] floating enable
+
 ## Screenshot
 # fullscreen screenshot
 bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
@@ -26,7 +30,7 @@ bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(
 
 ## wallpaper
 #output * bg ~/Pictures/Wallpapers/my-wallpaper.png fill
-output * bg ~/Pictures/Wallpapers/pawel-czerwinski-eTLKz1gEVoQ-unsplash-rounded.jpg fill
+output * bg ~/Pictures/Wallpapers/king-crimsoncrop.jpg fill
 #output * bg  #000000 solid_color
 
 ## floating window on pip
@@ -36,7 +40,7 @@ for_window [title="Picture-in-Picture"] floating enable
 client.focused #315ff3 #315ff3 #315ff3 #315ff3
 
 ## unfocused window color
-#client.unfocused #000000 #000000 #888888 #323232
+client.unfocused #000000 #000000 #888888 #323232
 
 default_border pixel 3px
 default_floating_border none

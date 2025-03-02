@@ -6,6 +6,8 @@
 # mod key Mod4-Super, Mod1-Alt
 set $mod Mod4
 
+for_window [class="desktop-head-unit"] fullscreen
+
 ## home row direction keys, like vim
 set $left h
 set $down j
@@ -30,7 +32,7 @@ bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(
 
 ## wallpaper
 #output * bg ~/Pictures/Wallpapers/my-wallpaper.png fill
-output * bg ~/Pictures/Wallpapers/king-crimsoncrop.jpg fill
+output * bg ~/Pictures/Wallpapers/tool-full-circle.png fill
 #output * bg  #000000 solid_color
 
 ## floating window on pip
@@ -51,8 +53,8 @@ titlebar_border_thickness 0
 ## idle configuration
 exec swayidle -w \
          timeout 180 'swaylock -f -c 000000' \
-         timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         timeout 210 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         before-sleep 'swaylock -f -F -c 000000' 
 
 ## input configuration
 # touchpad
@@ -61,7 +63,7 @@ input type:touchpad {
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
-    pointer_accel 0.5
+    pointer_accel 0.4
 }
 
 # keyboard
@@ -75,13 +77,14 @@ input type:keyboard {
   xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
  
   xkb_layout "us,tr"
+  xkb_file "~/.config/sway/my_custom_layout.xkb"
 }
 
 # Binded Mod Alt Space to switch keyboard layouts between US and TR
 bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next
 
 # brightness up
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
 # brightness down
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
@@ -249,19 +252,21 @@ bindsym $mod+r mode "resize"
 bindsym $mod+q exec "swaymsg bar mode toggle"
 bar {
     position bottom
+    #workspace_min_width 25px
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     status_command ~/.config/sway/scripts/status.sh
     
-    font "IBM Plex Sans Bold"
+    font "IBM Plex Sans Semi-Bold"
     height 25
 
     colors {
-        statusline #000000
-        background #dddddd
-       focused_workspace #ffffff #315ff3 #ffffff
+        #statusline #000000
+        #background #dddddd
+        focused_workspace #315ff3 #315ff3 #f5f5f5
+	#inactive_workspace #000000 #dddddd #000000
     }
 }
 

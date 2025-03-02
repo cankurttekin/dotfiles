@@ -3,7 +3,7 @@
 -- call plug#begin('~/.config/nvim/plugged')
 -- Plug 'ThePrimeagen/vim-be-good'
 -- call plug#end()
-
+require("cankurttekin")
 -- set clipboard
 vim.opt.clipboard = "unnamedplus"
 
@@ -18,6 +18,13 @@ vim.cmd([[
   call plug#begin('~/.config/nvim/plugged')
   Plug 'ThePrimeagen/vim-be-good'
   Plug 'ayu-theme/ayu-vim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'CopilotC-Nvim/CopilotChat.nvim'
+  Plug 'github/copilot.vim'
+  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'mbbill/undotree'
+  Plug 'tpope/vim-fugitive'
   call plug#end()
 
   set termguicolors     " Enable true colors
@@ -25,8 +32,6 @@ vim.cmd([[
   colorscheme ayu
 
 ]])
+require('telescope').setup {}
+require('CopilotChat').setup {}
 
--- CopilotChat
-require("CopilotChat").setup {
-  -- See Configuration section for options
-}

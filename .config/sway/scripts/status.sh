@@ -61,17 +61,21 @@ while true; do
         BLUETOOTH_DEVICES=""
     fi
 
-    BRIGHTNESS=$(brightnessctl | awk -F '[()/%]' '{print $2}' | tr -d '\n')
+    #BRIGHTNESS=$(brightnessctl | awk -F '[()/%]' '{print $2}' | tr -d '\n')
 
-    CPU_TEMP=$(sensors | grep -i 'Package id 0:' | awk '{print $4}' | sed 's/+//')
+    #CPU_TEMP=$(sensors | grep -i 'Package id 0:' | awk '{print $4}' | sed 's/+//')
     
-    POWER=$(sensors | grep -i 'power1:' | awk '{print $2}')
+    #POWER=$(sensors | grep -i 'power1:' | awk '{print $2}')
     
     # Get current date and time
     DATE_TIME=$(date +"%a, %b %e  %H:%M")
     
     # Output formatted string
-    echo "POWER: $POWER W   CPU TEMP: $CPU_TEMP   BRIGHTNESS: $BRIGHTNESS   $BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
+    #echo "POWER: $POWER W   CPU TEMP: $CPU_TEMP   BRIGHTNESS: $BRIGHTNESS   $BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
+
+    
+    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
+
     # Update every 30 seconds
     sleep 30
 done

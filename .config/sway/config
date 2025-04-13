@@ -29,7 +29,7 @@ bindsym Print exec grim ~/Pictures/Screenshots/screenshot-$(date +%s).png
 bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%s).png
 
 ## wallpaper
-output * bg ~/Pictures/Wallpapers/tool-full-circle.png fill
+output * bg ~/Pictures/Wallpapers/collective-vision.png fill
 #output * bg  #000000 solid_color
 
 # android auto head unit emulator
@@ -87,7 +87,9 @@ bindsym $mod+m output "eDP-1" toggle
 output "DP-3" {
     mode 2560x1440@100Hz
     scale 1
-}   
+}
+
+bindsym $mod+Shift+r exec ~/.config/sway/scripts/rotate_display.sh 
 
 # switch keyboard layouts between US and TR
 bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next

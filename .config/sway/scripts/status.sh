@@ -4,56 +4,49 @@ while true; do
     # BATTERY
     BAT=$(cat /sys/class/power_supply/BAT0/capacity)
     BAT_STATUS=$(cat /sys/class/power_supply/BAT0/status)
-
-    # Determine charging symbol
-    if [[ "$BAT_STATUS" == "Charging" ]]; then
-        CHARGING_SYMBOL="+"  # Charging symbol
-    elif [[ "$BAT_STATUS" == "Discharging" ]]; then
-	CHARGING_SYMBOL="-" # Discharging Symbol
-    else
-        CHARGING_SYMBOL=""  # Not charging and others
-    fi
+    CHARGING_SYMBOL=""
+    [ "$BAT_STATUS" == "Charging" ] && CHARGING_SYMBOL="+"
+    [ "$BAT_STATUS" == "Discharging" ] && CHARGING_SYMBOL="-"
 
     # VOLUME
     VOL=$(wpctl status | grep -A 10 "Sinks" | grep "\* " | head -n 1 | awk -F'vol: ' '{print $2}' | awk '{print $1}' | sed 's/]*$//' | awk '{printf "%.0f", $1 * 100}')
 
-    # WI-FI
+    # NETWORK: Wi-Fi + Ethernet
+    WIFI_INFO=""
+    ETH_INFO=""
     if command -v nmcli >/dev/null 2>&1; then
-        # Using nmcli
-        WIFI=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d':' -f2)
-	#WIFI=$(nmcli -t -f active,ssid dev wifi | grep 'yes' | cut -d':' -f2 | awk '{print substr($0,1,1)"..."substr($0,length($0)-3,4)}') # returns wifi name as a...aaaa
-        if [ -z "$WIFI" ]; then
-            WIFI="WIFI: Off"
-        else
-            WIFI="WIFI: $WIFI"
-        fi
-    elif command -v iwgetid >/dev/null 2>&1; then
-        # Using iwgetid
-        WIFI=$(iwgetid -r)
-        if [ -z "$WIFI_" ]; then
-            WIFI="WIFI: Off"
-        else
-            WIFI="WIFI: $WIFI"
-        fi
+        CONNECTIONS=$(nmcli -t -f TYPE,STATE,DEVICE,CONNECTION dev | grep ':connected')
+        while IFS= read -r LINE; do
+            TYPE=$(echo "$LINE" | cut -d: -f1)
+            DEVICE=$(echo "$LINE" | cut -d: -f3)
+            NAME=$(echo "$LINE" | cut -d: -f4)
+
+            if [ "$TYPE" = "wifi" ]; then
+                SIGNAL=$(nmcli -t -f IN-USE,SIGNAL dev wifi | grep '^\*' | cut -d: -f2)
+                SPEED=$(iw dev "$DEVICE" link | grep -oP 'tx bitrate: \K[^\s]+')
+                [ -n "$SPEED" ] && SPEED="${SPEED}Mbps"
+                WIFI_INFO="Wi-Fi: $NAME ($SIGNAL%)${SPEED:+ $SPEED}"
+            elif [ "$TYPE" = "ethernet" ]; then
+                ETH_STATUS=$(cat /sys/class/net/"$DEVICE"/operstate 2>/dev/null)
+                ETH_SPEED=$(cat /sys/class/net/"$DEVICE"/speed 2>/dev/null)
+                [ "$ETH_STATUS" = "up" ] && ETH_INFO="ETH: Up${ETH_SPEED:+ ${ETH_SPEED}Mbps}" || ETH_INFO="ETH: Down"
+            fi
+        done <<< "$CONNECTIONS"
+
+        [ -z "$WIFI_INFO" ] && [ -z "$ETH_INFO" ] && NETWORK="NET: Disconnected" || NETWORK="$WIFI_INFO   $ETH_INFO"
     else
-        WIFI="WIFI: Unknown"
+        NETWORK="NET: Unknown"
     fi
 
     # BLUETOOTH
     if command -v bluetoothctl >/dev/null 2>&1; then
         BLUETOOTH_STATUS=$(bluetoothctl show | grep "Powered" | awk '{print $2}')
         if [ "$BLUETOOTH_STATUS" == "yes" ]; then
-            BLUETOOTH_STATUS="BT: " # BT: 1 / Bluetooth on
+            BLUETOOTH_STATUS="BT: "
             BLUETOOTH_DEVICES=$(bluetoothctl devices Connected | awk '{print substr($0, index($0, $3))}' | paste -sd ',')
-            #BLUETOOTH_DEVICES=$(bluetoothctl devices Connected | awk '{print $3}')
-            if [ -z "$BLUETOOTH_DEVICES" ]; then
-                #BLUETOOTH_DEVICES="No devices"
-		BLUETOOTH_DEVICES="On"
-            else
-                BLUETOOTH_DEVICES="$BLUETOOTH_DEVICES"
-            fi
+            [ -z "$BLUETOOTH_DEVICES" ] && BLUETOOTH_DEVICES="On"
         else
-            BLUETOOTH_STATUS="BT: Off" # bluetooth off
+            BLUETOOTH_STATUS="BT: Off"
             BLUETOOTH_DEVICES=""
         fi
     else
@@ -61,22 +54,11 @@ while true; do
         BLUETOOTH_DEVICES=""
     fi
 
-    #BRIGHTNESS=$(brightnessctl | awk -F '[()/%]' '{print $2}' | tr -d '\n')
-
-    #CPU_TEMP=$(sensors | grep -i 'Package id 0:' | awk '{print $4}' | sed 's/+//')
-    
-    #POWER=$(sensors | grep -i 'power1:' | awk '{print $2}')
-    
-    # Get current date and time
+    # DATE & TIME
     DATE_TIME=$(date +"%a, %b %e  %H:%M")
-    
-    # Output formatted string
-    #echo "POWER: $POWER W   CPU TEMP: $CPU_TEMP   BRIGHTNESS: $BRIGHTNESS   $BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
 
-    
-    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $WIFI   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME " | awk '{print $0}'
+    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $NETWORK   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME"
 
-    # Update every 30 seconds
     sleep 30
 done
 

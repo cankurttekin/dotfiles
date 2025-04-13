@@ -1,3 +1,3 @@
-use ('ayu-theme/ayu-vim')
+#use ('ayu-theme/ayu-vim')
 
 

@@ -1,2 +1,2 @@
 require("cankurttekin.remap")
-print("hello from cankurttekin")
+print("cankurttekin's neovim")

@@ -10,6 +10,7 @@ This repository contains my dotfiles for my yoga laptop running fedora with sway
 - VimFugitive 
 
 ## sway
+- Wikiart Wallpaper: deps `swaybg`, `jq`, `imagemagick`
 
 ## wofi
 

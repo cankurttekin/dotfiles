@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUTPUT="DP-3"
+OUTPUT="DP-1"
 
 # Get the current transform value
 CURRENT=$(swaymsg -t get_outputs | jq -r ".[] | select(.name==\"$OUTPUT\") | .transform")

@@ -11,9 +11,11 @@ while true; do
     # VOLUME
     VOL=$(wpctl status | grep -A 10 "Sinks" | grep "\* " | head -n 1 | awk -F'vol: ' '{print $2}' | awk '{print $1}' | sed 's/]*$//' | awk '{printf "%.0f", $1 * 100}')
 
-    # NETWORK: Wi-Fi + Ethernet
-    WIFI_INFO=""
+    # NETWORK: Wi-Fi + Ethernet + IP
+    WIFI_INFO="WLAN: Off"
     ETH_INFO=""
+    IP_ADDR="IP: N/A"
+
     if command -v nmcli >/dev/null 2>&1; then
         CONNECTIONS=$(nmcli -t -f TYPE,STATE,DEVICE,CONNECTION dev | grep ':connected')
         while IFS= read -r LINE; do
@@ -25,18 +27,32 @@ while true; do
                 SIGNAL=$(nmcli -t -f IN-USE,SIGNAL dev wifi | grep '^\*' | cut -d: -f2)
                 SPEED=$(iw dev "$DEVICE" link | grep -oP 'tx bitrate: \K[^\s]+')
                 [ -n "$SPEED" ] && SPEED="${SPEED}Mbps"
-                WIFI_INFO="Wi-Fi: $NAME ($SIGNAL%)${SPEED:+ $SPEED}"
+                WIFI_INFO="WLAN: $NAME ($SIGNAL%)${SPEED:+ $SPEED}"
+
+                # Get IP address for Wi-Fi
+                IP=$(ip -4 addr show "$DEVICE" | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+                [ -n "$IP" ] && IP_ADDR="IP: $IP"
             elif [ "$TYPE" = "ethernet" ]; then
                 ETH_STATUS=$(cat /sys/class/net/"$DEVICE"/operstate 2>/dev/null)
                 ETH_SPEED=$(cat /sys/class/net/"$DEVICE"/speed 2>/dev/null)
-                [ "$ETH_STATUS" = "up" ] && ETH_INFO="ETH: Up${ETH_SPEED:+ ${ETH_SPEED}Mbps}" || ETH_INFO="ETH: Down"
+                if [ "$ETH_STATUS" = "up" ]; then
+                    ETH_INFO="ETH: Up${ETH_SPEED:+ ${ETH_SPEED}Mbps}"
+
+                    # Get IP address for Ethernet
+                    IP=$(ip -4 addr show "$DEVICE" | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+                    [ -n "$IP" ] && IP_ADDR="IP: $IP"
+                else
+                    ETH_INFO="ETH: Down"
+                fi
             fi
         done <<< "$CONNECTIONS"
-
-        [ -z "$WIFI_INFO" ] && [ -z "$ETH_INFO" ] && NETWORK="NET: Disconnected" || NETWORK="$WIFI_INFO   $ETH_INFO"
+        [ -z "$ETH_INFO" ] && ETH_INFO="ETH: Down"
     else
-        NETWORK="NET: Unknown"
+        WIFI_INFO="WLAN: Unknown"
+        ETH_INFO="ETH: Unknown"
     fi
+
+    NETWORK="$WIFI_INFO   $ETH_INFO   $IP_ADDR"
 
     # BLUETOOTH
     if command -v bluetoothctl >/dev/null 2>&1; then
@@ -50,15 +66,14 @@ while true; do
             BLUETOOTH_DEVICES=""
         fi
     else
-        BLUETOOTH_STATUS="BL: NULL"
+        BLUETOOTH_STATUS="BT: NULL"
         BLUETOOTH_DEVICES=""
     fi
 
     # DATE & TIME
     DATE_TIME=$(date +"%a, %b %e  %H:%M")
 
-    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $NETWORK   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME"
+    echo "$BLUETOOTH_STATUS$BLUETOOTH_DEVICES   $NETWORK   VOL: $VOL   BAT: $BAT%$CHARGING_SYMBOL   $DATE_TIME "
 
-    sleep 30
+    sleep 60
 done
-

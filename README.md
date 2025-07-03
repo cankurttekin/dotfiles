@@ -1,17 +1,3 @@
 # dotfiles
-This repository contains my dotfiles for my yoga laptop running fedora with sway.
+ultra basic i3 configuration for work laptop
 
-## neovim
-- Copilot
-- Telescope
-- CopilotChat
-- Treesitter
-- UndoTree
-- VimFugitive 
-
-## sway
-- Wikiart Wallpaper: deps `swaybg`, `jq`, `imagemagick`
-
-## wofi
-
-## foot

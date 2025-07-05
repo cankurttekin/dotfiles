@@ -2,11 +2,11 @@
 # ~/.config/sway/config
 # Read `man 5 sway` for a complete reference.
 
-### Variables
+## variables
 # mod key Mod4-Super, Mod1-Alt
 set $mod Mod4
 
-## home row direction keys, like vim
+# vim like home row direction keys
 set $left h
 set $down j
 set $up k
@@ -18,7 +18,7 @@ set $term foot
 ## application launcher
 set $menu wofi --show drun -i --width=40% --height=43% | xargs swaymsg exec --
 
-##LXQT polkit agent for perms
+## LXQT polkit agent for perms
 #exec /usr/libexec/lxqt-policykit-agent
 #for_window [app_id="lxqt-policykit-agent"] floating enable
 
@@ -32,16 +32,18 @@ bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(
 #output * bg ~/Pictures/Wallpapers/collective-vision.png fill
 #output * bg  #000000 solid_color
 exec_always --no-startup-id ~/.config/sway/scripts/wikiart-wallpaper-imagemagick.sh >> ~/.config/sway/wallpaper.log 2>&1
+
 # android auto head unit emulator
 #for_window [class="desktop-head-unit"] fullscreen
 
 ## floating window on pip
 for_window [title="Picture-in-Picture"] floating enable
 
-## focused window color
+## window colors
+# focused
 client.focused #315ff3 #315ff3 #315ff3 #315ff3
 
-## unfocused window color
+# unfocused 
 client.unfocused #000000 #000000 #888888 #323232
 
 default_border pixel 2px
@@ -50,7 +52,7 @@ titlebar_padding 1
 
 titlebar_border_thickness 0
 
-## idle configuration
+## idle
 exec swayidle -w \
          timeout 180 'swaylock -f -c 000000' \
          timeout 210 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
@@ -76,60 +78,42 @@ bindsym F17 exec systemctl suspend
 bindsym F18 exec wofi --show run
 bindsym XF86Mail exec thunderbird
 
-input type:keyboard {
-  # swap CTRL AND ALT
-  #xkb_options "ctrl:swapcaps"
 
-  # swap ctr:caps win:alt
-  # xkb_options "altwin:swap_lalt_lwin"
-  # xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
+input type:keyboard {
   xkb_options "ctrl:swapcaps,altwin:swap_lalt_lwin"
  
   xkb_layout "us,tr"
-  xkb_file "~/.config/sway/swap.xkb"
+  xkb_file "~/.config/sway/xkb/swap.xkb"
 }
 
 # switch keyboard layouts between US and TR
-bindsym $mod+Alt+Space input type:keyboard xkb_switch_layout next
+bindsym $mod+Space input type:keyboard xkb_switch_layout next
 
-# brightness up
+## brightness
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-
-# brightness down
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-# mute toggle
+# volume, media keys
 bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-
-# volume up
 bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- -l 1.2
-
-# volume down
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.2
-
-# play/pause
 bindsym XF86AudioPlay exec playerctl play-pause
-
-# next track
 bindsym XF86AudioNext exec playerctl next
-
-# previous track
 bindsym XF86AudioPrev exec playerctl previous
-
-# stop
 bindsym XF86AudioStop exec playerctl stop
 
 ## display
 # toggle laptop internal display
 bindsym $mod+m output "eDP-1" toggle
 
-# external display configuration for 2k 100Hz monitor
+## external display configuration for 2k 100Hz monitor
+# this may change
 output "DP-3" {
     mode 2560x1440@100Hz
     scale 1
 }
 
-# rotate display binding
+# rotate display
 bindsym $mod+Shift+r exec ~/.config/sway/scripts/rotate_display.sh 
 
 #
@@ -137,16 +121,13 @@ bindsym $mod+Shift+r exec ~/.config/sway/scripts/rotate_display.sh
 # Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
-#
-# Basics:
-#
     # Start a terminal
     bindsym $mod+Return exec $term
 
     # Kill focused window
     bindsym $mod+Shift+q kill
 
-    # Start your launcher
+    # Start launcher
     bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.

@@ -15,3 +15,7 @@ This repository contains my dotfiles for my yoga laptop running fedora with sway
 ## wofi
 
 ## foot
+
+
+# branch i3
+contains configurations for x11 system

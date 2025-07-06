@@ -1,58 +1,32 @@
--- init.vim
--- set clipboard+=unnamedplus
--- call plug#begin('~/.config/nvim/plugged')
--- Plug 'ThePrimeagen/vim-be-good'
--- call plug#end()
-require("cankurttekin")
--- set clipboard
-vim.opt.clipboard = "unnamedplus"
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- colorscheme
+vim.opt.clipboard = "unnamedplus"
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
 vim.o.number = true
 vim.opt.termguicolors = true
--- vim.cmd("colorscheme ayu")
--- vim.cmd("colorscheme uvbox")
--- Plugin Manager (vim-plug)
-vim.cmd([[
-  call plug#begin('~/.config/nvim/plugged')
-  Plug 'ThePrimeagen/vim-be-good'
-  "Plug 'ayu-theme/ayu-vim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'CopilotC-Nvim/CopilotChat.nvim'
-  Plug 'github/copilot.vim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'mbbill/undotree'
-  Plug 'tpope/vim-fugitive'
-  Plug 'stevearc/dressing.nvim'
-  Plug 'MunifTanjim/nui.nvim'
-  Plug 'MeanderingProgrammer/render-markdown.nvim'
+vim.opt.background = "light"
 
-  " Optional deps
-  Plug 'hrsh7th/nvim-cmp'
-  Plug 'nvim-tree/nvim-web-devicons' "or Plug 'echasnovski/mini.icons'
-  Plug 'HakonHarnes/img-clip.nvim'
-  Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
-  
-  Plug 'maxmx03/solarized.nvim'
-  
-  call plug#end()
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
 
-  set termguicolors     " Enable true colors
-  "autocmd! User avante.nvim lua << EOF
-]])
-vim.o.background = "light"
-vim.cmd.colorscheme("solarized")
-require('solarized').setup {
-  theme = "neo", -- or "default"
-  transparent = false,
-  styles = {
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-  },
-}
-require('telescope').setup {}
-require('CopilotChat').setup {}
---require('avante').setup()
+local packer_bootstrap = ensure_packer()
+
+require("plugins")
+
+if packer_bootstrap then
+  require("packer").sync()
+end
+
+pcall(require, "cankurttekin")

@@ -1,1 +1,8 @@
 *.log
+
+# neovim
+# plugin directories
+pack/
+plugged/
+lazy-lock.json
+init.vim.bak

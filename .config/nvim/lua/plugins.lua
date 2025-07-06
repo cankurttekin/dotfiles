@@ -3,6 +3,22 @@
 return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
 
+  -- use { "github/copilot.vim" }
+  -- use({
+  --  "CopilotC-Nvim/CopilotChat.nvim",
+  --  branch = "main",
+  --  requires = {
+  --    { "github/copilot.vim" },
+  --    { "nvim-lua/plenary.nvim" },
+  --    { "nvim-telescope/telescope.nvim" }
+  --  },
+  --config = function()
+  --  require("CopilotChat").setup({
+      -- optional settings
+  --    debug = false,
+  --  })
+ -- end,
+-- })
   use "ThePrimeagen/vim-be-good"
   use {
     "ThePrimeagen/harpoon",
@@ -42,8 +58,8 @@ return require("packer").startup(function(use)
         },
         ignore_filetypes = { cpp = true },
         color = {
-          suggestion_color = "#ffffff",
-          cterm = 244,
+          suggestion_color = "#7aa2f7",
+          cterm = 110,
         },
         log_level = "info",
         disable_inline_completion = false,
@@ -60,7 +76,8 @@ return require("packer").startup(function(use)
   use "hrsh7th/nvim-cmp"
   use "nvim-tree/nvim-web-devicons"
   use "HakonHarnes/img-clip.nvim"
-
+  
+  --[[
   use {
     "yetone/avante.nvim",
     branch = "main",
@@ -69,6 +86,7 @@ return require("packer").startup(function(use)
       require("avante").setup()
     end,
   }
+  --]]
 
   use {
     "maxmx03/solarized.nvim",
@@ -88,4 +106,29 @@ return require("packer").startup(function(use)
       vim.cmd.colorscheme("solarized")
     end,
   }
+
+  use {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "auto",
+          icons_enabled = false,
+          
+          section_separators = "",
+          component_separators = "",
+        }
+      })
+    end,
+  }
+  --[[
+  use "nvim-tree/nvim-web-devicons"
+  use {
+    "nvim-tree/nvim-tree.lua",
+    requires = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("nvim-tree").setup()
+    end,
+  }
+  --]]
 end)

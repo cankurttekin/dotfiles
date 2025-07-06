@@ -1,6 +1,9 @@
 # dotfiles
 This repository contains my dotfiles for my yoga laptop running fedora with sway.
 
+# screenshots
+![screenshot](./screenshot.png)
+
 ## neovim
 - Copilot
 - Telescope

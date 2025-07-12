@@ -1,4 +1,0 @@
-set clipboard+=unnamedplus
-call plug#begin('~/.config/nvim/plugged')
-Plug 'ThePrimeagen/vim-be-good'
-call plug#end()

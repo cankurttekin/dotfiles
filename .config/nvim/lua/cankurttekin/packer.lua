@@ -90,4 +90,15 @@ return require('packer').startup(function(use)
   use "mfussenegger/nvim-jdtls"
   use "nvim-treesitter/nvim-treesitter-textobjects"
   use "folke/which-key.nvim"
+
+  use { "nvim-lua/plenary.nvim" }
+  use { "MunifTanjim/nui.nvim" }
+  use { "echasnovski/mini.icons" }
+  use { "stevearc/dressing.nvim" }
+
+  use {
+          "yetone/avante.nvim",
+          branch = "main",
+          run = "make"
+  }
 end)

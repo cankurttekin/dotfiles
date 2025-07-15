@@ -85,6 +85,11 @@ _G.packer_plugins = {
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["avante.nvim"] = {
+    loaded = true,
+    path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/avante.nvim",
+    url = "https://github.com/yetone/avante.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -110,6 +115,11 @@ _G.packer_plugins = {
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/copilot.vim",
     url = "https://github.com/github/copilot.vim"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -134,6 +144,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["mini.icons"] = {
+    loaded = true,
+    path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/mini.icons",
+    url = "https://github.com/echasnovski/mini.icons"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -186,7 +206,7 @@ _G.packer_plugins = {
     url = "https://github.com/MeanderingProgrammer/render-markdown.nvim"
   },
   ["solarized.nvim"] = {
-    config = { "\27LJ\2\n¼\2\0\0\5\0\17\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0009\0\16\0'\2\1\0B\0\2\1K\0\1\0\16colorscheme\bcmd\bvim\vstyles\14variables\14functions\rkeywords\1\0\1\vitalic\2\rcomments\1\0\4\rkeywords\0\14functions\0\rcomments\0\14variables\0\1\0\1\vitalic\2\16transparent\1\0\1\venable\1\1\0\3\vstyles\0\16transparent\0\ntheme\bneo\nsetup\14solarized\frequire\0" },
+    config = { "\27LJ\2\n¼\2\0\0\5\0\17\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0009\0\16\0'\2\1\0B\0\2\1K\0\1\0\16colorscheme\bcmd\bvim\vstyles\14variables\14functions\rkeywords\1\0\1\vitalic\2\rcomments\1\0\4\14variables\0\rcomments\0\14functions\0\rkeywords\0\1\0\1\vitalic\2\16transparent\1\0\1\venable\1\1\0\3\16transparent\0\vstyles\0\ntheme\bneo\nsetup\14solarized\frequire\0" },
     loaded = true,
     path = "/home/cankurttekin/.local/share/nvim/site/pack/packer/start/solarized.nvim",
     url = "https://github.com/maxmx03/solarized.nvim"
@@ -224,14 +244,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: solarized.nvim
-time([[Config for solarized.nvim]], true)
-try_loadstring("\27LJ\2\n¼\2\0\0\5\0\17\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0009\0\16\0'\2\1\0B\0\2\1K\0\1\0\16colorscheme\bcmd\bvim\vstyles\14variables\14functions\rkeywords\1\0\1\vitalic\2\rcomments\1\0\4\rkeywords\0\14functions\0\rcomments\0\14variables\0\1\0\1\vitalic\2\16transparent\1\0\1\venable\1\1\0\3\vstyles\0\16transparent\0\ntheme\bneo\nsetup\14solarized\frequire\0", "config", "solarized.nvim")
-time([[Config for solarized.nvim]], false)
 -- Config for: CopilotChat.nvim
 time([[Config for CopilotChat.nvim]], true)
 try_loadstring("\27LJ\2\nG\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\ndebug\1\nsetup\16CopilotChat\frequire\0", "config", "CopilotChat.nvim")
 time([[Config for CopilotChat.nvim]], false)
+-- Config for: solarized.nvim
+time([[Config for solarized.nvim]], true)
+try_loadstring("\27LJ\2\n¼\2\0\0\5\0\17\0\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\0035\4\t\0=\4\n\0034\4\0\0=\4\v\0034\4\0\0=\4\f\3=\3\r\2B\0\2\0016\0\14\0009\0\15\0009\0\16\0'\2\1\0B\0\2\1K\0\1\0\16colorscheme\bcmd\bvim\vstyles\14variables\14functions\rkeywords\1\0\1\vitalic\2\rcomments\1\0\4\14variables\0\rcomments\0\14functions\0\rkeywords\0\1\0\1\vitalic\2\16transparent\1\0\1\venable\1\1\0\3\16transparent\0\vstyles\0\ntheme\bneo\nsetup\14solarized\frequire\0", "config", "solarized.nvim")
+time([[Config for solarized.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

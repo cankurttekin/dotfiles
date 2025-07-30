@@ -6,3 +6,6 @@ pack/
 plugged/
 lazy-lock.json
 init.vim.bak
+# compiled files
+.config/nvim/plugins/packer_compiled.lua
+

@@ -1,4 +1,4 @@
-function ColorMyPencils(color)
+function ColorMyWorld(color)
 	color = color or "solarized"
 	vim.cmd.colorscheme(color)
 
@@ -7,4 +7,4 @@ function ColorMyPencils(color)
 	
 end
 
-ColorMyPencils()
+ColorMyWorld()

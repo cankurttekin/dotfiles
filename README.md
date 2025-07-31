@@ -1,12 +1,20 @@
+## branch i3
+- basic i3 configuration for my x11 work machine
+
 ## neovim
-- Harpoon
-- Supermaven
-- Copilot
-- Telescope
-- CopilotChat
+- solarized
 - Treesitter
 - UndoTree
 - VimFugitive 
+- lsp
+- nvim-dap
+- nvim-cmp
+- mason
+- Harpoon
+- Telescope
+- Supermaven
+- Copilot
+- CopilotChat
 - ...
 
 ## sway
@@ -18,5 +26,5 @@
 ## foot
 - solarized 
 
-# branch i3
-contains minimal i3 configurations for x11 system
+## tlp
+- very basic, aimed if plugged in performance; else if battery max possible uptime without shitting itself.

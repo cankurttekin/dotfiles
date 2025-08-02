@@ -86,8 +86,6 @@ input type:keyboard {
   xkb_file "~/.config/sway/xkb/swap.xkb"
 }
 
-# switch keyboard layouts between US and TR
-bindsym $mod+Space input type:keyboard xkb_switch_layout next
 
 ## brightness
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%

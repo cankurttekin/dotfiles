@@ -1,47 +1,49 @@
 window {
-margin: 0px;
-font-size: 24px;
-font-family: "DejaVu Sans";
-border: 0px solid black;
-background-color: white;
+        margin: 0px;
+        font-size: 24px;
+        font-family: "DejaVu Sans";
+        border: 2px solid green;
+        background-color: white;
 }
 
 #input {
-font-family: "DejaVu Sans Medium";
-margin: 0px;
-border: 0px solid #0000;
-border-radius: 0px;
-background-color: #fdf6e3;
+        font-family: "DejaVu Sans Medium";
+        margin: 0px;
+        border: 0px solid #0000;
+        border-radius: 0px;
+        background-color: #fdf6e3;
 }
 
 #inner-box {
-margin: 0px;
-border: 0px solid #0000;
-border-radius: 0;
-background-color: #fdf6e3;
+        margin: 0px;
+        border: 0px solid #0000;
+        border-radius: 0;
+        background-color: #fdf6e3;
 }
 
 #outer-box {
-margin: 0px;
-border: 4px solid #eee8d5;
-background-color: #fdf6e3;
+        margin: 0px;
+        border: 6px solid #eee8d5;
+        background-color: #fdf6e3;
 }
 
 #scroll {
-margin: 0px;
+        margin: 0px;
 }
 
 #text {
-margin: 0px;
+        color: #586e79;
+        margin: 0px;
+        margin-left: 4px;
 }
 
 #entry:selected {
-background-color: #268bd2;
-font-family: "DejaVu Sans Medium";
+        background-color: #268bd2;
+        font-family: "DejaVu Sans Bold";
+        font-style: bold;
 }
 
 #text:selected {
-/*background-color: black;*/
-	color: white;
+        color: white;
 }
 

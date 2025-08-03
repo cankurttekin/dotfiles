@@ -1,0 +1,49 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+PS1='\[\033[01;34m\] 🩷 \W \[\033[01;32m\]$(git rev-parse --is-inside-work-tree &>/dev/null && echo "git:\[\033[01;33m\]($(git rev-parse --abbrev-ref HEAD))\[\033[00m\]")\[\033[00m\]\$ '
+set -o vi
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+export HISTSIZE=10000
+export HISTIGNORE="ls:ps:history"
+export HISTTIMEFORMAT="[%d-%m-%Y %T] "
+#HISTCONTROL=ignoredups
+export PATH=$PATH:$HOME/go/bin
+
+source <(ng completion script) # Angular CLI autocompletion
+
+# Node Version Manager
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+export PATH=~/.opencode/bin:$PATH
+
+# aliases
+alias vim="nvim"
+alias projects="cd ~/Documents/projects"
+alias speedtest="wget http://st-ankara-1.turksatkablo.com.tr:8080/download?size=51200000 -O /dev/null"
+alias whoami="whoami && curl ident.me && echo"
+alias rm="rm -i"

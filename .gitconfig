@@ -1,0 +1,17 @@
+[diff]
+	tool = nvimdiff
+[difftool "nvimdiff"]
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[core]
+	editor = nvim
+	autocrlf = false
+[merge]
+	tool = vimdiff
+[credential]
+	helper = cache --timeout=3600
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
+[include]
+    path = ~/.gitconfig.local

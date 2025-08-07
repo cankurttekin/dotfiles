@@ -1,11 +1,18 @@
 *.log
-
-# neovim
-# plugin directories
 pack/
 plugged/
 lazy-lock.json
 init.vim.bak
-# compiled files
-.config/nvim/plugins/packer_compiled.lua
-
+**/packer_compiled.lua
+*.swp
+*.bak
+*.tmp
+**/.swp
+**/.nvim/swap/*
+**/.nvim/undo/*
+**/.nvim/undodir/*
+**/.vim/undo/*
+**/.vim/undodir/*
+.session
+**/.local/share/nvim/history
+**/.cache/

@@ -8,33 +8,18 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
     use "ThePrimeagen/vim-be-good"
-
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.8',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-    --use "camgunz/amber"
-	use {
-		"maxmx03/solarized.nvim",
-		config = function()
-			require("solarized").setup({
-				theme = "neo",
-				transparent = {
-					enable = false,
-				},
-				styles = {
-					comments = { italic = true },
-					keywords = { italic = true },
-					functions = {},
-					variables = {},
-				},
-			})
-			vim.cmd.colorscheme("solarized")
-		end,
-	}
+    -- colorschemes
+    use "camgunz/amber"
+    use "ellisonleao/gruvbox.nvim"
+    use "rose-pine/neovim"
+	use "maxmx03/solarized.nvim"
 
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
 	use {
 		"ThePrimeagen/harpoon",
@@ -42,23 +27,24 @@ return require('packer').startup(function(use)
 		requires = { {"nvim-lua/plenary.nvim"} }
 	}
 
-	use 'mbbill/undotree'
-	use 'tpope/vim-fugitive'
+	use "mbbill/undotree"
+	use "tpope/vim-fugitive"
+    use "lewis6991/gitsigns.nvim"
 	use "neovim/nvim-lspconfig"
 	use {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 	}
 
-	use { "hrsh7th/nvim-cmp" }
-	use { "hrsh7th/cmp-nvim-lsp" }
-	use { "L3MON4D3/LuaSnip" }
-	use { "saadparwaiz1/cmp_luasnip" }
-	use { "hrsh7th/cmp-buffer" }
-	use { "hrsh7th/cmp-path" }
-	use { "rafamadriz/friendly-snippets" }
+	use "hrsh7th/nvim-cmp"
+	use "hrsh7th/cmp-nvim-lsp"
+	use "L3MON4D3/LuaSnip"
+	use "saadparwaiz1/cmp_luasnip"
+	use "hrsh7th/cmp-buffer"
+	use "hrsh7th/cmp-path"
+	use "rafamadriz/friendly-snippets"
 
-    use { "github/copilot.vim" }
+    use "github/copilot.vim"
     use({
             "CopilotC-Nvim/CopilotChat.nvim",
             branch = "main",
@@ -75,15 +61,10 @@ return require('packer').startup(function(use)
             end,
     })
 
-    -- use { "nvim-tree/nvim-web-devicons" }
-    use {
-            'nvim-lualine/lualine.nvim',
-    }
+  -- use { "nvim-tree/nvim-web-devicons" }
+  use "nvim-lualine/lualine.nvim"
 
-    use {
-            "supermaven-inc/supermaven-nvim"
-    }
-
+  use "supermaven-inc/supermaven-nvim"
   use "MeanderingProgrammer/render-markdown.nvim"
   use "mfussenegger/nvim-dap"
   use "rcarriga/nvim-dap-ui"
@@ -91,14 +72,16 @@ return require('packer').startup(function(use)
   use "nvim-treesitter/nvim-treesitter-textobjects"
   use "folke/which-key.nvim"
 
-  use { "nvim-lua/plenary.nvim" }
-  use { "MunifTanjim/nui.nvim" }
-  use { "echasnovski/mini.icons" }
-  use { "stevearc/dressing.nvim" }
+  use "nvim-lua/plenary.nvim"
+  use "MunifTanjim/nui.nvim"
+  use "echasnovski/mini.icons"
+  use "stevearc/dressing.nvim"
 
   use {
           "yetone/avante.nvim",
           branch = "main",
           run = "make"
   }
+
+  use "cankurttekin/pinit-nvim"
 end)
